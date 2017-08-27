@@ -28,7 +28,8 @@ class Api::V1::TasksController < ApplicationController
     task = Task.find_by(id: params[:id])
     task.destroy
     tasks = Task.all
-    render json: tasks
+    sortedTasks = tasks.sort_by {|task| task.priority.to_i}
+    render json: sortedTasks
   end
 
   private
