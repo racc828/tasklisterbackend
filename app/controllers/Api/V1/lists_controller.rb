@@ -7,6 +7,8 @@ class Api::V1::ListsController < ApplicationController
 
   def create
     list = List.create(list_params)
+    user = User.find(params[:user_id])
+    user.lists << list
     render json: list
   end
 
@@ -31,7 +33,7 @@ class Api::V1::ListsController < ApplicationController
   private
 
   def list_params
-    params.require(:list).permit(:name)
+    params.require(:list).permit(:name, :user_id)
   end
 
 end
