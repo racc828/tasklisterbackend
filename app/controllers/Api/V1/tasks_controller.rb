@@ -7,7 +7,7 @@ class Api::V1::TasksController < ApplicationController
 
   def create
     task = Task.create(task_params)
-    list = List.find_by(id: params[:id])
+    list = List.find(params[:list_id])
     list.tasks << task
     render json: task
   end
