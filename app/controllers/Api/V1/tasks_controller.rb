@@ -2,7 +2,8 @@ class Api::V1::TasksController < ApplicationController
 
   def index
     tasks = Task.all
-    render json: tasks
+    sortedTasks = tasks.sort_by {|task| task.priority.to_i}
+    render json: sortedTasks
   end
 
   def create
